@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
+import React , {Component} from 'react';
 import './App.css';
+import Food from './container/Food';
+import Recipe from './container/Recipe';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
-function App() {
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      food: [],
+      Recipe: []
+    };
+  }
+  handleClick = ()=>{
+    console.log("onclick fnction will triger")
+  }
+  render(){
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className = "d-flex search-block">
+      <TextField
+          id="filled-full-width"
+          style={{ margin: 8  }}
+          placeholder="Placeholder"
+          fullWidth
+          margin="normal"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          variant="filled"
+        /> 
+        <Button variant="contained" color="primary" disableElevation onClick={this.handleClick}> Search</Button>
+      </div>
+      <h2> Food Data </h2>
+      <Food />
+      <h2> Recipe Data </h2>
+      <Recipe />
     </div>
   );
+  }
 }
 
 export default App;
