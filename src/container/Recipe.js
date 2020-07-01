@@ -30,21 +30,13 @@ const StyledTableRow = withStyles((theme) =>
   }),
 )(TableRow);
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
+export default function Recipe(props) {
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
-export default function Recipe() {
-
-  return (
+   return (
+     <div>
+       {props.item > 0 ?
+           <div>
+    <h2> Recipe Data </h2> 
     <TableContainer component={Paper}>
       <Table className="table-width" aria-label="customized table">
         <TableHead>
@@ -57,12 +49,12 @@ export default function Recipe() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+        {props.filterFood.map((row) => (
             <StyledTableRow key={row.name}>
               <StyledTableCell component="th" scope="row">
                 {row.name}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
+              <StyledTableCell align="right">{row.energy}</StyledTableCell>
               <StyledTableCell align="right">{row.fat}</StyledTableCell>
               <StyledTableCell align="right">{row.carbs}</StyledTableCell>
               <StyledTableCell align="right">{row.protein}</StyledTableCell>
@@ -71,5 +63,9 @@ export default function Recipe() {
         </TableBody>
       </Table>
     </TableContainer>
-  );
+    </div>
+         :""}
+     </div>
+   )
+  
 }

@@ -30,26 +30,21 @@ const StyledTableRow = withStyles((theme) =>
   }),
 )(TableRow);
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
+export default function food(props) {
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
-export default function food() {
-
-  return (
+   return (
+     <div>
+       {props.item > 0 ?
+           <div>
+    <h2> Food Data </h2> 
     <TableContainer component={Paper}>
       <Table className="table-width" aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Dessert (100g serving)</StyledTableCell>
+            <StyledTableCell>Image</StyledTableCell>
+            <StyledTableCell>Qty</StyledTableCell>
+            <StyledTableCell>Unit</StyledTableCell>
+            <StyledTableCell>Name</StyledTableCell>
             <StyledTableCell align="right">Calories</StyledTableCell>
             <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
             <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
@@ -57,19 +52,33 @@ export default function food() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+        {props.filterFood.map((row) => (
+            <StyledTableRow key={row.food.categoryLabel}>
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                <img className = "image-source" src = {row.food.image}></img>
               </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
+              <StyledTableCell component="th" scope="row">
+                100
+              </StyledTableCell>
+              <StyledTableCell component="th" scope="row">
+                g
+              </StyledTableCell>
+              <StyledTableCell component="th" scope="row">
+                {row.food.label}
+              </StyledTableCell>
+
+              <StyledTableCell align="right">{row.food.nutrients.ENERC_KCAL}</StyledTableCell>
+              <StyledTableCell align="right">{row.food.nutrients.FAT}</StyledTableCell>
+              <StyledTableCell align="right">{row.food.nutrients.CHOCDF}</StyledTableCell>
+              <StyledTableCell align="right">{row.food.nutrients.PROCNT}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
-  );
+    </div>
+         :""}
+     </div>
+   )
+  
 }
