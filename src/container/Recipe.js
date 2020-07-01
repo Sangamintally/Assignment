@@ -30,6 +30,21 @@ const StyledTableRow = withStyles((theme) =>
   }),
 )(TableRow);
 
+const label = (carb,fat,pro)=>{
+    let p_ratio = pro/carb+fat+pro;
+    let c_ratio = carb+fat/carb+fat+pro;
+    if(p_ratio > 15) {
+      return `High protein`
+    }
+    if(p_ratio <= 15 && p_ratio >= 12) {
+      return `Balanced`
+    }
+    if(c_ratio > 50) {
+      return `High Carb`
+    }
+    return `Regular `
+  }
+
 export default function Recipe(props) {
 
    return (
@@ -41,24 +56,39 @@ export default function Recipe(props) {
       <Table className="table-width" aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Dessert (100g serving)</StyledTableCell>
+          <StyledTableCell>Image</StyledTableCell>
+            <StyledTableCell>Qty</StyledTableCell>
+            <StyledTableCell>Unit</StyledTableCell>
+            <StyledTableCell>Title</StyledTableCell>
             <StyledTableCell align="right">Calories</StyledTableCell>
             <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
             <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
             <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+            <StyledTableCell align="right">label</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-        {props.filterFood.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
-                {row.name}
-              </StyledTableCell>
-              <StyledTableCell align="right">{row.energy}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
-            </StyledTableRow>
+        {props.Recipe.map((row) => (
+            <StyledTableRow key={row.recipe}>
+            <StyledTableCell component="th" scope="row">
+              <img className = "image-source" src = {row.recipe.image}></img>
+            </StyledTableCell>
+            <StyledTableCell component="th" scope="row">
+              {row.recipe.yield}
+            </StyledTableCell>
+            <StyledTableCell component="th" scope="row">
+            servings
+            </StyledTableCell>
+            <StyledTableCell component="th" scope="row">
+              {row.recipe.label}
+            </StyledTableCell>
+
+            <StyledTableCell align="right">{row.recipe.calories}</StyledTableCell>
+            <StyledTableCell align="right">{row.recipe.digest[0].total}</StyledTableCell>
+            <StyledTableCell align="right">{row.recipe.digest[1].total}</StyledTableCell>
+            <StyledTableCell align="right">{row.recipe.digest[2].total}</StyledTableCell>
+            <StyledTableCell align="right">{label(row.recipe.digest[1].total,row.recipe.digest[0].total,row.recipe.digest[2].total)}</StyledTableCell>
+          </StyledTableRow>
           ))}
         </TableBody>
       </Table>

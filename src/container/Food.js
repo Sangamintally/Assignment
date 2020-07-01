@@ -30,6 +30,21 @@ const StyledTableRow = withStyles((theme) =>
   }),
 )(TableRow);
 
+const label = (carb,fat,pro)=>{
+  let p_ratio = pro/carb+fat+pro;
+  let c_ratio = carb+fat/carb+fat+pro;
+  if(p_ratio > 15) {
+    return `High protein`
+  }
+  if(p_ratio <= 15 && p_ratio >= 12) {
+    return `Balanced`
+  }
+  if(c_ratio > 50) {
+    return `High Carb`
+  }
+  return `Regular `
+}
+
 export default function food(props) {
 
    return (
@@ -49,6 +64,7 @@ export default function food(props) {
             <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
             <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
             <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+            <StyledTableCell align="right">label</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -71,6 +87,7 @@ export default function food(props) {
               <StyledTableCell align="right">{row.food.nutrients.FAT}</StyledTableCell>
               <StyledTableCell align="right">{row.food.nutrients.CHOCDF}</StyledTableCell>
               <StyledTableCell align="right">{row.food.nutrients.PROCNT}</StyledTableCell>
+              <StyledTableCell align="right">{label(row.food.nutrients.CHOCDF,row.food.nutrients.FAT,row.food.nutrients.PROCNT)}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

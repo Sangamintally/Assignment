@@ -29,30 +29,18 @@ class App extends Component {
     };
   }
   handleClick = async()=>{
-      console.log("fetchData1");
       const response1 = await searchFood({food: this.state.searchValue})
-      console.log(response1,"r111111");
       this.setState({food: response1.data.hints})
     
 
       console.log("fetchData2");
       const response2 = await searchRecipe({food: this.state.searchValue})
-      console.log(response2);
-      this.setState({Recipe: response2})
+      console.log(response2.data.hits,"2222222222");
+      this.setState({Recipe: response2.data.hits})
   }
 
-
-
-    // const filterFood = this.state.list.filter(item=> item.name == this.state.searchValue)
-    // this.setState({
-    //   food:filterFood
-    // })
-    // console.log(filterFood.length,"00000000000")
-  
-
-
   render(){
-    console.log("aaaaaaaaaa",this.state.food)
+    console.log("aaaaaaaaaa",this.state.Recipe)
   return (
     <div className="App">
       <div className = "d-flex search-block">
@@ -75,7 +63,7 @@ class App extends Component {
       </div>
   
        <Food  filterFood = {this.state.food} item = {this.state.food.length}/> 
-      {/* <Recipe filterFood = {this.state.food} item = {this.state.food.length} /> */} 
+       <Recipe Recipe = {this.state.Recipe} item = {this.state.food.length} /> 
     </div>
   );
   }
