@@ -72,7 +72,7 @@ export default function Recipe(props) {
         {props.Recipe.map((row) => (
             <StyledTableRow key={row.recipe}>
             <StyledTableCell component="th" scope="row">
-              <img className = "image-source" src = {row.recipe.image}></img>
+              <img className = "image-source" src = {row.recipe.image} alt="recipe-image"></img>
             </StyledTableCell>
             <StyledTableCell component="th" scope="row">
               {row.recipe.yield}
