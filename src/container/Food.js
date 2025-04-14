@@ -71,7 +71,7 @@ export default function food(props) {
         {props.filterFood.map((row) => (
             <StyledTableRow key={row.food.categoryLabel}>
               <StyledTableCell component="th" scope="row">
-                <img className = "image-source" src = {row.food.image} alt="food-image"></img>
+                <img className = "image-source" src = {row.food.image} alt="A playful running in the park"></img>
               </StyledTableCell>
               <StyledTableCell component="th" scope="row">
                 100
